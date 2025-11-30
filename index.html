@@ -7,26 +7,31 @@
     body {
       margin: 0;
       padding: 0;
-      backgroundcolor: black;
-      background-size: cover;
+      background-color: black; /* fondo negro */
       width: 100vw;
       height: 100vh;
     }
     #game-container {
       position: absolute;
-      top: 120px;       /* ajustá según tu screenshot */
+      top: 120px;       /* ajustá según tu necesidad */
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;     /* ajustá al tamaño del SWF si hace falta */
+      width: 800px;     /* ajustá al tamaño del SWF */
       height: 600px;
     }
   </style>
   <script src="assets/ruffle/ruffle.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const container = document.getElementById("game-container");
+      const player = ruffle.createPlayer();
+      container.appendChild(player);
+      player.load("assets/bomb-it-2.swf");
+    });
+  </script>
 </head>
 <body>
-  <div id="game-container">
-    <ruffle-player src="assets/bomb-it-2.swf"></ruffle-player>
-  </div>
+  <div id="game-container"></div>
 </body>
 </html>
-
