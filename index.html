@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bomb It 2 — Offline</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('assets/BombIt2.png') no-repeat top left;
+      background-size: cover;
+      width: 100vw;
+      height: 100vh;
+    }
+    #game-container {
+      position: absolute;
+      top: 120px;       /* ajustá según tu screenshot */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;     /* ajustá al tamaño del SWF si hace falta */
+      height: 600px;
+    }
+  </style>
+  <script src="assets/ruffle/ruffle.js"></script>
+</head>
+<body>
+  <div id="game-container">
+    <ruffle-player src="assets/bomb-it-2.swf"></ruffle-player>
+  </div>
+</body>
+</html>
