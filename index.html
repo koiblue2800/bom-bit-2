@@ -16,8 +16,8 @@
       top: 120px;       /* ajustá según tu necesidad */
       left: 50%;
       transform: translateX(-50%);
-      width: 1000px;     /* ajustá al tamaño del SWF */
-      height: 1000px;
+      width: 800px;     /* ajustá al tamaño del SWF */
+      height: 600px;
     }
   </style>
   <!-- Ruffle desde CDN -->
@@ -28,6 +28,7 @@
       const container = document.getElementById("game-container");
       const player = ruffle.createPlayer();
       container.appendChild(player);
+      // Cargar automáticamente el SWF
       player.load("assets/bomb-it-2.swf");
     });
   </script>
@@ -36,4 +37,3 @@
   <div id="game-container"></div>
 </body>
 </html>
-
