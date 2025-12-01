@@ -13,10 +13,10 @@
     }
     #game-container {
       position: absolute;
-      top: 120px;       /* ajustá según tu necesidad */
+      top: 120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 800px;     /* ajustá al tamaño del SWF */
+      width: 800px;
       height: 600px;
     }
   </style>
@@ -28,7 +28,13 @@
       const container = document.getElementById("game-container");
       const player = ruffle.createPlayer();
       container.appendChild(player);
-      // Cargar automáticamente el SWF
+
+      // Configuración para evitar el botón de play
+      player.config = {
+        autoplay: "on",   // fuerza autoplay
+        unmuteOverlay: "hidden" // oculta overlay de sonido
+      };
+
       player.load("assets/bomb-it-2.swf");
     });
   </script>
