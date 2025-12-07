@@ -8,11 +8,12 @@
     html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      width: 100%;
+      background: radial-gradient(circle at center, #ffffff 40%, #87ceeb 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: radial-gradient(circle at center, #ffffff 40%, #87ceeb 100%);
     }
 
     #game-container {
@@ -29,25 +30,15 @@
     }
   </style>
 
-  <!-- Ruffle CDN -->
+  <!-- Ruffle desde CDN -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
   <div id="game-container"></div>
 
   <script>
-    window.addEventListener("load", () => {
-      // Si no existe RufflePlayer (falló CDN), carga local
-      if (!window.RufflePlayer) {
-        const script = document.createElement("script");
-        script.src = "assets/ruffle/ruffle.js";
-        script.onload = initRuffle;
-        document.head.appendChild(script);
-      } else {
-        initRuffle();
-      }
-
-      function initRuffle() {
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.RufflePlayer) {
         const ruffle = window.RufflePlayer.newest();
         const container = document.getElementById("game-container");
         const player = ruffle.createPlayer();
@@ -59,7 +50,9 @@
         };
 
         container.appendChild(player);
-        player.load("assets/bomb-it-2.swf");
+        player.load("assets/ruffle/bomb-it-2.swf");
+      } else {
+        console.error("Ruffle no se cargó correctamente.");
       }
     });
   </script>
