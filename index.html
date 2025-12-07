@@ -8,18 +8,22 @@
     html, body {
       margin: 0;
       padding: 0;
-      background-color: black;
+      height: 100%;
+      width: 100%;
+      /* Fondo radial: blanco en el centro, celeste hacia afuera */
+      background: radial-gradient(circle, #ffffff 40%, #87ceeb 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
 
     #game-container {
       width: 100%;
       max-width: 960px;
-      aspect-ratio: 4 / 3; /* proporción clásica de Flash */
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      background-color: rgba(255,255,255,0.8); /* opcional: leve overlay */
     }
 
     ruffle-player {
@@ -57,6 +61,9 @@
 
       container.appendChild(player);
       player.load("assets/bomb-it-2.swf");
+
+      // Volumen inicial al 25%
+      player.volume = 0.25;
     });
   </script>
 </body>
