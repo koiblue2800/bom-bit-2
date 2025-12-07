@@ -8,18 +8,18 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
       background-color: black;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
 
     #game-container {
       width: 100%;
       max-width: 960px;
-      aspect-ratio: 4 / 3; /* proporción clásica de juegos Flash */
+      aspect-ratio: 4 / 3; /* proporción clásica de Flash */
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
     ruffle-player {
@@ -29,13 +29,13 @@
     }
   </style>
 
-  <!-- Primero intenta cargar Ruffle desde CDN -->
+  <!-- Ruffle CDN -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <!-- Si falla, carga la copia local -->
+  <!-- Fallback local -->
   <script>
     if (!window.RufflePlayer) {
       const script = document.createElement("script");
-      script.src = "assets/ruffle/ruffle.js"; // tu copia local
+      script.src = "assets/ruffle/ruffle.js";
       document.head.appendChild(script);
     }
   </script>
@@ -48,15 +48,14 @@
       const ruffle = window.RufflePlayer.newest();
       const container = document.getElementById("game-container");
       const player = ruffle.createPlayer();
-      container.appendChild(player);
 
-      // Configuración para autoplay y ocultar overlay de sonido
       player.config = {
         autoplay: "on",
-        unmuteOverlay: "hidden"
+        unmuteOverlay: "hidden",
+        splashScreen: false
       };
 
-      // Carga del juego
+      container.appendChild(player);
       player.load("assets/bomb-it-2.swf");
     });
   </script>
