@@ -8,22 +8,18 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      /* Fondo radial: blanco en el centro, celeste hacia afuera */
-      background: radial-gradient(circle, #ffffff 40%, #87ceeb 100%);
+      background-color: black;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
 
     #game-container {
       width: 100%;
       max-width: 960px;
       aspect-ratio: 4 / 3; /* proporción clásica de Flash */
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      background-color: rgba(255,255,255,0.8); /* overlay para resaltar el juego */
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
     }
 
     ruffle-player {
@@ -33,41 +29,34 @@
     }
   </style>
 
-  <!-- Ruffle desde CDN -->
+  <!-- Ruffle CDN -->
   <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <!-- Fallback local -->
+  <script>
+    if (!window.RufflePlayer) {
+      const script = document.createElement("script");
+      script.src = "assets/ruffle/ruffle.js";
+      document.head.appendChild(script);
+    }
+  </script>
 </head>
 <body>
   <div id="game-container"></div>
 
   <script>
-    window.addEventListener("load", () => {
-      // Si no existe RufflePlayer (falló CDN), carga local
-      if (!window.RufflePlayer) {
-        const script = document.createElement("script");
-        script.src = "assets/ruffle/ruffle.js";
-        script.onload = initRuffle;
-        document.head.appendChild(script);
-      } else {
-        initRuffle();
-      }
+    window.addEventListener("DOMContentLoaded", () => {
+      const ruffle = window.RufflePlayer.newest();
+      const container = document.getElementById("game-container");
+      const player = ruffle.createPlayer();
 
-      function initRuffle() {
-        const ruffle = window.RufflePlayer.newest();
-        const container = document.getElementById("game-container");
-        const player = ruffle.createPlayer();
+      player.config = {
+        autoplay: "on",
+        unmuteOverlay: "hidden",
+        splashScreen: false
+      };
 
-        player.config = {
-          autoplay: "on",
-          unmuteOverlay: "hidden",
-          splashScreen: false
-        };
-
-        container.appendChild(player);
-        player.load("assets/bomb-it-2.swf");
-
-        // Volumen inicial al 25%
-        player.volume = 0.25;
-      }
+      container.appendChild(player);
+      player.load("assets/bomb-it-2.swf");
     });
   </script>
 </body>
