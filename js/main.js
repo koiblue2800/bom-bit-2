@@ -15,6 +15,7 @@ window.addEventListener("load", () => {
   };
 
   container.appendChild(player);
-  player.load("assets/bomb-it-2.swf");
+  player.load("assets/nobuyuki3rd14.swf");
 });
+
 
